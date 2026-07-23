@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidateData } from "../utils/validate";
 
 const Login = () => {
   const [isSignInForm, setIsSignInFrom] = useState("true");
+  const [errorMessage, setErrorMessage] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggolSignInFrom = () => {
     setIsSignInFrom(!isSignInForm);
   };
 
+  const handleValidateData = () => {
+    //checkValidateData(email,password)
+    const validateMessage = checkValidateData(
+      email.current.value,
+      password.current.value,
+    );
+    setErrorMessage(validateMessage);
+  };
   return (
     <div>
       <Header />
@@ -19,11 +31,15 @@ const Login = () => {
         />
       </div>
 
-      <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg"
+      >
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sing Up"}
         </h1>
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="p-2 m-2 w-full bg-gray-800 rounded-lg"
@@ -36,17 +52,28 @@ const Login = () => {
           />
         )}
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="p-2 m-2 w-full bg-gray-800 rounded-lg"
         />
-        <button className="p-2 m-2 bg-red-600 w-full rounded-lg">
+        <p className="text-red-500 p-2 m-2 w-full">{errorMessage}</p>
+        <button
+          onClick={handleValidateData}
+          className="p-2 m-2 bg-red-600 w-full rounded-lg"
+        >
           {isSignInForm ? "Sign In" : "Sing Up"}
         </button>
         <p className="py-6 cursor-pointer" onClick={toggolSignInFrom}>
           {isSignInForm
             ? "New to Netflix? Sign Up now"
             : "Register User. Please sign in"}
+        </p>
+
+        <p className="text-gray-400 text-xs mt-3 text-center">
+          This project is for educational purposes only. It is not affiliated
+          with, endorsed by, sponsored by, or associated with Netflix. All
+          trademarks and logos belong to their respective owners.
         </p>
       </form>
     </div>

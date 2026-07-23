@@ -1,10 +1,17 @@
+## Disclaimer:
+
+- This project is for educational purposes only.
+- It is not affiliated with, endorsed by, sponsored by,
+- or associated with Netflix. All trademarks and logos belong to their respective owners.
+
 # myflix-gpt
 
 - Create reactapp
 - Configure Tailwind css
 - Header component created
-- Log in component created
-- Sign up from freated
+- Log in form
+- Sign up form
+- Form validation
 
 # Features
 
