@@ -1,19 +1,23 @@
 # myflix-gpt
+
 - Create reactapp
 - Configure Tailwind css
-
+- Header component created
+- Log in component created
+- Sign up from freated
 
 # Features
+
 - Login/Sign Up
-    - Sign In / Sign up Form
-    - redirect to Browse Page
+  - Sign In / Sign up Form
+  - redirect to Browse Page
 - Browse (after authentication)
-    - Header
-    - Main Movie
-        - Tailer in Background
-        - Title & Description
-        - MovieSuggestions
-           - MovieLists × N
+  - Header
+  - Main Movie
+    - Tailer in Background
+    - Title & Description
+    - MovieSuggestions
+      - MovieLists × N
 - MyFlixGPT
-    - Search Bar
-    - Movie Suggestions
+  - Search Bar
+  - Movie Suggestions
