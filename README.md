@@ -12,6 +12,10 @@
 - Log in form
 - Sign up form
 - Form validation
+- useRef hooks
+- Firebase setup
+- Deploy our aap to production
+- Create signup user account in FireBase
 
 # Features
 
