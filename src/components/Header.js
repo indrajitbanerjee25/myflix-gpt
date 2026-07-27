@@ -1,16 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("Signed out successfully");
+      navigate("/");
+    } catch (error) {
+      navigate("/error");
+    }
+  };
+
   return (
-    <div className=" absolute top-0 left-0 w-full px-8 py-2 bg-gradient-to-b from-black flex justify-between items-center z-50">
+    <div
+      className="absolute top-0 left-0 w-full px-8 py-4 
+                    bg-gradient-to-b from-black 
+                    flex justify-between items-center z-50"
+    >
+      {/* Left Side Logo */}
       <h1 className="text-red-600 text-3xl font-bold">StreamGPT</h1>
-      {/* <div className="flex items-center gap-4">
+
+      {/* Right Side Section */}
+      <div className="flex items-center gap-4">
         <img
+          onClick={() => setShowDropdown(!showDropdown)}
           className="w-10 h-10 rounded-full object-cover"
+          alt="usericon"
           src="https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
-          alt="logo"
         />
-      </div> */}
+
+        {/* <button
+          onClick={handleSignOut}
+          className='bg-red-600 text-white px-3 py-1 rounded-md 
+                     hover:bg-red-700 transition'
+        >
+          Sign Out
+        </button> */}
+        {showDropdown && (
+          <div
+            className="absolute top-12 right-0 w-40 bg-black text-white
+                      rounded-md shadow-lg border border-gray-700"
+          >
+            <p className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
+              Profile
+            </p>
+
+            <p className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
+              Account
+            </p>
+
+            <p
+              onClick={handleSignOut}
+              className="px-4 py-2 hover:bg-red-600 cursor-pointer"
+            >
+              Sign Out
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
