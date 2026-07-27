@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const user = useSelector((store) => store.user);
 
   const handleSignOut = async () => {
     try {
@@ -32,16 +34,21 @@ const Header = () => {
           onClick={() => setShowDropdown(!showDropdown)}
           className="w-10 h-10 rounded-full object-cover"
           alt="usericon"
-          src="https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
+          src={
+            user?.photoURL ||
+            "https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
+          }
         />
 
-        {/* <button
-          onClick={handleSignOut}
-          className='bg-red-600 text-white px-3 py-1 rounded-md 
-                     hover:bg-red-700 transition'
-        >
-          Sign Out
-        </button> */}
+        {/* {user && (
+          <button
+            onClick={handleSignOut}
+            className="bg-red-600 text-white px-3 py-1 rounded-md 
+                     hover:bg-red-700 transition"
+          >
+            Sign Out
+          </button>
+        )} */}
         {showDropdown && (
           <div
             className="absolute top-12 right-0 w-40 bg-black text-white
@@ -55,12 +62,14 @@ const Header = () => {
               Account
             </p>
 
-            <p
-              onClick={handleSignOut}
-              className="px-4 py-2 hover:bg-red-600 cursor-pointer"
-            >
-              Sign Out
-            </p>
+            {user && (
+              <p
+                onClick={handleSignOut}
+                className="px-4 py-2 hover:bg-red-600 cursor-pointer"
+              >
+                Sign Out
+              </p>
+            )}
           </div>
         )}
       </div>

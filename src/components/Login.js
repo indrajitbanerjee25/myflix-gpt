@@ -8,14 +8,17 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const email = useRef(null);
   const password = useRef(null);
-  //const name = useRef(null);
+  const name = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggolSignInFrom = () => {
     setIsSignInForm(!isSignInForm);
@@ -41,8 +44,31 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL:
+              "https://lh3.googleusercontent.com/a/ACg8ocKqceGksx0xft7OrLm78r5JtHlsuRk4Qlqq8Upbt5HWLVzUsnlS=s360-c-no",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                }),
+              );
+              navigate("/browse");
+              // Profile updated!
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
+
           // ...
         })
         .catch((error) => {
@@ -62,19 +88,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           //
-          updateProfile(user, {
-            //displayName: name.current.value,
-            photoURL:
-              "https://lh3.googleusercontent.com/a/ACg8ocKqceGksx0xft7OrLm78r5JtHlsuRk4Qlqq8Upbt5HWLVzUsnlS=s360-c-no",
-          })
-            .then(() => {
-              // Profile updated!
-              // ...
-            })
-            .catch((error) => {
-              // An error occurred
-              // ...
-            });
+
           //
           navigate("/browse");
           // ...
@@ -114,6 +128,7 @@ const Login = () => {
           <input
             type="text"
             placeholder="Name"
+            ref={name}
             className="p-2 m-2 w-full bg-gray-800 rounded-lg"
           />
         )}
