@@ -18,6 +18,10 @@
 - Create signup user account in FireBase
 - Implement sign in user API
 - Created Redux store with UserSlice
+- update profile
+- Sign up Display name and profile URL bug fix
+- If user is not login and tyr to go via url its redirect to login page and vice-versa
+- Unsubscribe to the onAuthStateChange call back
 
 # Features
 
