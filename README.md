@@ -22,6 +22,10 @@
 - Sign up Display name and profile URL bug fix
 - If user is not login and tyr to go via url its redirect to login page and vice-versa
 - Unsubscribe to the onAuthStateChange call back
+- Change the Hardcoded value in constant file
+- Register TMDB API and create an app and get access token
+- get Data from TMDB now playing movies List
+- use customhooks
 
 # Features
 

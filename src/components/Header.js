@@ -4,6 +4,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO_URL } from "../utils/constant";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -61,10 +62,7 @@ const Header = () => {
           onClick={() => setShowDropdown(!showDropdown)}
           className="w-10 h-10 rounded-full object-cover"
           alt="usericon"
-          src={
-            user?.photoURL ||
-            "https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.webp"
-          }
+          src={user?.photoURL || LOGO_URL}
         />
 
         {/* {user && (

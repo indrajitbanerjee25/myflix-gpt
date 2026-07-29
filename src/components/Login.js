@@ -9,6 +9,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_PHOTO_URL } from "../utils/constant";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -44,8 +45,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://lh3.googleusercontent.com/a/ACg8ocKqceGksx0xft7OrLm78r5JtHlsuRk4Qlqq8Upbt5HWLVzUsnlS=s360-c-no",
+            photoURL: USER_PHOTO_URL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -110,20 +110,21 @@ const Login = () => {
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sing Up"}
         </h1>
+
+        {!isSignInForm && (
+          <input
+            type="text"
+            placeholder="Full Name"
+            ref={name}
+            className="p-2 m-2 w-full bg-gray-800 rounded-lg"
+          />
+        )}
         <input
           ref={email}
           type="text"
           placeholder="Email Address"
           className="p-2 m-2 w-full bg-gray-800 rounded-lg"
         />
-        {!isSignInForm && (
-          <input
-            type="text"
-            placeholder="Name"
-            ref={name}
-            className="p-2 m-2 w-full bg-gray-800 rounded-lg"
-          />
-        )}
         <input
           ref={password}
           type="password"
