@@ -8,11 +8,9 @@
 
 - Some files, such as firebase.js and constant.js, are intentionally excluded from this repository because they contain sensitive API keys and configuration details.
 
-- During development, these files were removed after GitHub/Firebase flagged the exposed credentials.
-- They will be managed securely using environment variables (.env) and appropriate configuration before the final deployment.
+- During development, these files were removed after GitHub/Firebase flagged the exposed credentials.They will be managed securely using environment variables (.env) and appropriate configuration before the final deployment.
 
-- If you want to run this project locally, create your own Firebase project and TMDB API key,
-- then configure the required environment variables.
+- If you want to run this project locally, create your own Firebase project and TMDB API key,then configure the required environment variables.
 
 # myflix-gpt
 
