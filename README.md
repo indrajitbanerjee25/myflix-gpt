@@ -1,8 +1,6 @@
 ## Disclaimer:
 
-- This project is for educational purposes only.
-- It is not affiliated with, endorsed by, sponsored by,
-- or associated with Netflix. All trademarks and logos belong to their respective owners.
+- This project is for educational purposes only. It is not affiliated with, endorsed by, sponsored by, or associated with Netflix. All trademarks and logos belong to their respective owners.
 
 ## Note
 
