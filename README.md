@@ -6,8 +6,7 @@
 
 ## Note
 
-- Some files, such as firebase.js and constant.js, are intentionally excluded from this repository
-- because they contain sensitive API keys and configuration details.
+- Some files, such as firebase.js and constant.js, are intentionally excluded from this repository because they contain sensitive API keys and configuration details.
 
 - During development, these files were removed after GitHub/Firebase flagged the exposed credentials.
 - They will be managed securely using environment variables (.env) and appropriate configuration before the final deployment.
