@@ -5,9 +5,8 @@ import { useDispatch } from "react-redux";
 
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  //   console.log("useMovieTrailer-1", movieId);
+
   const getMovieSVideo = async () => {
-    //console.log("useMovieTrailer-2", movieId);
     try {
       const movieData = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
@@ -20,7 +19,6 @@ const useMovieTrailer = (movieId) => {
       );
       const trailer =
         filteredData.length > 0 ? filteredData[0] : json.results[0];
-      console.log("trailer", trailer);
 
       dispatch(addTrailerVideo(trailer));
     } catch (err) {
@@ -29,7 +27,6 @@ const useMovieTrailer = (movieId) => {
   };
 
   useEffect(() => {
-    console.log("useEffect movieId =", movieId);
     if (!movieId) return;
     getMovieSVideo();
   }, [movieId]);

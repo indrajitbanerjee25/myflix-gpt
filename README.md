@@ -25,7 +25,13 @@
 - Change the Hardcoded value in constant file
 - Register TMDB API and create an app and get access token
 - get Data from TMDB now playing movies List
-- use customhooks
+- use customhooks nowplaying movies
+- create movie slice
+- Planning for main and secondery container
+- fetch data for trailer video
+- update store with trailer video data
+- embadeed you tube video and make it auto paly and mute
+- added tailwind css for looking
 
 # Features
 
