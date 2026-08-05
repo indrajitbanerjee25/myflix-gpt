@@ -13,7 +13,7 @@ const useNowPlayingMovies = () => {
       );
       const json = await data.json();
       console.log(json.results);
-      disptch(addNowPlayingMovies);
+      disptch(addNowPlayingMovies(json.results));
     } catch (err) {
       console.log(err.message);
     }
