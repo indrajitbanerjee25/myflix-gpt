@@ -39,6 +39,7 @@
 - embadeed you tube video and make it auto paly and mute
 - added tailwind css better view
 - movieCard, movieList, moviecontainer component is created
+- create custom hooks popularMovies,topRatedMovies,upcomingMovies
 
 # Features
 
