@@ -37,7 +37,8 @@
 - fetch data for trailer video
 - update store with trailer video data
 - embadeed you tube video and make it auto paly and mute
-- added tailwind css for looking
+- added tailwind css better view
+- movieCard, movieList, moviecontainer component is created
 
 # Features
 
