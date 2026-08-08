@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constant";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false);
+
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -19,6 +20,10 @@ const Header = () => {
     } catch (error) {
       navigate("/error");
     }
+  };
+
+  const handleGPTSearchClick = () => {
+    dispatch(toggleGptSearchView());
   };
 
   useEffect(() => {
@@ -58,44 +63,25 @@ const Header = () => {
 
       {/* Right Side Section */}
       <div className="flex items-center gap-4">
+        <button
+          className="p-2 m-2 bg-blue-800 text-white rounded-md"
+          onClick={handleGPTSearchClick}
+        >
+          GPT Search
+        </button>
         <img
-          onClick={() => setShowDropdown(!showDropdown)}
           className="w-10 h-10 rounded-full object-cover"
           alt="usericon"
           src={user?.photoURL || LOGO_URL}
         />
 
-        {/* {user && (
+        {user && (
           <button
             onClick={handleSignOut}
-            className="bg-red-600 text-white px-3 py-1 rounded-md 
-                     hover:bg-red-700 transition"
+            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
           >
             Sign Out
           </button>
-        )} */}
-        {showDropdown && (
-          <div
-            className="absolute top-12 right-0 w-40 bg-black text-white
-                      rounded-md shadow-lg border border-gray-700"
-          >
-            <p className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
-              Profile
-            </p>
-
-            <p className="px-4 py-2 hover:bg-gray-800 cursor-pointer">
-              Account
-            </p>
-
-            {user && (
-              <p
-                onClick={handleSignOut}
-                className="px-4 py-2 hover:bg-red-600 cursor-pointer"
-              >
-                Sign Out
-              </p>
-            )}
-          </div>
         )}
       </div>
     </div>
