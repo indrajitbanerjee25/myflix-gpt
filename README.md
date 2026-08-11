@@ -2,11 +2,11 @@
 
 - This project is for educational purposes only. It is not affiliated with, endorsed by, sponsored by, or associated with Netflix. All trademarks and logos belong to their respective owners.
 
-## Note
+## Project Setup
 
 - Some files, such as firebase.js and constant.js, are intentionally excluded from this repository because they contain sensitive API keys and configuration details.
 
-- During development, these files were removed after GitHub/Firebase flagged the exposed credentials.They will be managed securely using environment variables (.env) and appropriate configuration before the final deployment.
+- During development, these files were removed after GitHub/Firebase flagged the exposed credentials.They will be managed securely using environment variables (.env) and appropriate configuration.
 
 - If you want to run this project locally, create your own Firebase project and TMDB API key,then configure the required environment variables.
 
@@ -40,6 +40,8 @@
 - added tailwind css better view
 - movieCard, movieList, moviecontainer component is created
 - create custom hooks popularMovies,topRatedMovies,upcomingMovies
+- create language constant for three languages, so any one can change the languages. you can add more if you want
+- create language change options for GPT search page
 
 # Features
 

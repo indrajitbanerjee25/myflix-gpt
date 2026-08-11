@@ -4,14 +4,16 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { LOGO_URL } from "../utils/constant";
+import { LOGO_URL, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
 
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = async () => {
     try {
@@ -24,6 +26,10 @@ const Header = () => {
 
   const handleGPTSearchClick = () => {
     dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
   };
 
   useEffect(() => {
@@ -62,28 +68,43 @@ const Header = () => {
       <h1 className="text-red-600 text-3xl font-bold">StreamGPT</h1>
 
       {/* Right Side Section */}
-      <div className="flex items-center gap-4">
-        <button
-          className="p-2 m-2 bg-blue-800 text-white rounded-md"
-          onClick={handleGPTSearchClick}
-        >
-          GPT Search
-        </button>
-        <img
-          className="w-10 h-10 rounded-full object-cover"
-          alt="usericon"
-          src={user?.photoURL || LOGO_URL}
-        />
 
-        {user && (
+      {user && (
+        <div className="flex items-center gap-4">
+          {showGptSearch && (
+            <div>
+              <select
+                className="p-2 m-2 bg-gray-900 text-white rounded-lg"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          <button
+            className="p-2 m-2 bg-blue-800 text-white rounded-md"
+            onClick={handleGPTSearchClick}
+          >
+            {showGptSearch ? "Homepage" : "GPT Search"}
+          </button>
+          <img
+            className="w-10 h-10 rounded-full object-cover"
+            alt="usericon"
+            src={user?.photoURL || LOGO_URL}
+          />
+
           <button
             onClick={handleSignOut}
             className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
           >
             Sign Out
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
