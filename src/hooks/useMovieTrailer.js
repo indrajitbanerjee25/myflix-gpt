@@ -29,7 +29,7 @@ const useMovieTrailer = (movieId) => {
   useEffect(() => {
     if (!movieId) return;
     getMovieSVideo();
-  }, [movieId]);
+  }, []);
 };
 
 export default useMovieTrailer;
