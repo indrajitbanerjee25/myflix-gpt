@@ -42,6 +42,16 @@
 - create custom hooks popularMovies,topRatedMovies,upcomingMovies
 - create language constant for three languages, so any one can change the languages. you can add more if you want
 - create language change options for GPT search page
+- get open AI API key
+- get GPT search call
+- fetch getMovies suggesition from TMDB
+- create slices and added data
+- Reused components (movielist) for suggesition
+- use Memoization for API call
+- Multilanguage support
+- add .env file
+- add .env file to git ignore
+- made app responsive
 
 # Features
 
