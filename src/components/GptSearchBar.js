@@ -74,7 +74,7 @@ const GptSearchBar = () => {
         />
 
         <button
-          className=" col-span-3 m-4 py-2 px-4 bg-red-600  text-white rounded-lg"
+          className="shrink-0 rounded-lg bg-red-600 px-3 py-2 text-sm text-white sm:px-5 sm:py-3 sm:text-base"
           onClick={handleGPTSearchClick}
         >
           {lang[langKey].search}
