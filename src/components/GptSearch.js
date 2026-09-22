@@ -8,12 +8,13 @@ const GptSearch = () => {
     <>
       <div className="fixed inset-0 -z-10">
         <img
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover object-center"
           src={BG_URL}
           alt="background"
         />
       </div>
-      <div className="">
+
+      <div className="min-h-screen px-3 pt-20 sm:px-5 sm:pt-24 md:px-8 md:pt-28">
         <GptSearchBar />
         <GptMovieGuggestions />
       </div>
