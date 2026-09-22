@@ -10,15 +10,14 @@ import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
-  const dispatch = useDispatch();
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      console.log("Signed out successfully");
     } catch (error) {
       navigate("/error");
     }
@@ -35,47 +34,74 @@ const Header = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, email, displayName, photoURL } = user;
 
         dispatch(
           addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
+            uid,
+            email,
+            displayName,
+            photoURL,
           }),
         );
+
         navigate("/browse");
       } else {
-        // User is signed out
-        // ...
         dispatch(removeUser());
         navigate("/");
       }
     });
+
     return () => unsubscribe();
-  }, []);
+  }, [dispatch, navigate]);
 
   return (
-    <div
-      className="absolute top-0 left-0 w-full px-8 py-4 
-                    bg-gradient-to-b from-black 
-                    flex justify-between items-center z-50"
+    <header
+      className="
+        absolute top-0 left-0 z-50 w-full
+        bg-gradient-to-b from-black via-black/80 to-transparent
+        px-3 py-3
+        sm:px-5 sm:py-4
+        md:px-8
+      "
     >
-      {/* Left Side Logo */}
-      <h1 className="text-red-600 text-3xl font-bold">StreamGPT</h1>
+      <div className="flex w-full items-center justify-between gap-2">
+        {/* Logo */}
+        <h1
+          className="
+            shrink-0
+            text-xl font-bold text-red-600
+            sm:text-2xl
+            md:text-3xl
+          "
+        >
+          StreamGPT
+        </h1>
 
-      {/* Right Side Section */}
-
-      {user && (
-        <div className="flex items-center gap-4">
-          {showGptSearch && (
-            <div>
+        {/* Right Section */}
+        {user && (
+          <div
+            className="
+              flex items-center
+              gap-1
+              sm:gap-2
+              md:gap-4
+            "
+          >
+            {/* Language Dropdown */}
+            {showGptSearch && (
               <select
-                className="p-2 m-2 bg-gray-900 text-white rounded-lg"
+                className="
+                  w-[70px] rounded-md
+                  bg-gray-900
+                  px-1 py-2
+                  text-xs text-white
+                  outline-none
+                  sm:w-auto sm:px-2 sm:text-sm
+                  md:px-3 md:py-2
+                "
                 onChange={handleLanguageChange}
+                defaultValue={SUPPORTED_LANGUAGES[0]?.identifier}
               >
                 {SUPPORTED_LANGUAGES.map((lang) => (
                   <option key={lang.identifier} value={lang.identifier}>
@@ -83,29 +109,62 @@ const Header = () => {
                   </option>
                 ))}
               </select>
-            </div>
-          )}
-          <button
-            className="p-2 m-2 bg-blue-800 text-white rounded-md"
-            onClick={handleGPTSearchClick}
-          >
-            {showGptSearch ? "Homepage" : "GPT Search"}
-          </button>
-          <img
-            className="w-10 h-10 rounded-full object-cover"
-            alt="usericon"
-            src={user?.photoURL || LOGO_URL}
-          />
+            )}
 
-          <button
-            onClick={handleSignOut}
-            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
-          >
-            Sign Out
-          </button>
-        </div>
-      )}
-    </div>
+            {/* GPT Search Button */}
+            <button
+              onClick={handleGPTSearchClick}
+              className="
+                whitespace-nowrap
+                rounded-md
+                bg-blue-800
+                px-2 py-2
+                text-xs font-medium
+                text-white
+                transition
+                hover:bg-blue-700
+                sm:px-3 sm:text-sm
+                md:px-4 md:text-base
+              "
+            >
+              {showGptSearch ? "Home" : "GPT Search"}
+            </button>
+
+            {/* User Image */}
+            <img
+              className="
+                h-8 w-8
+                rounded-full
+                object-cover
+                sm:h-9 sm:w-9
+                md:h-10 md:w-10
+              "
+              alt="user icon"
+              src={user?.photoURL || LOGO_URL}
+            />
+
+            {/* Sign Out */}
+            <button
+              onClick={handleSignOut}
+              className="
+                whitespace-nowrap
+                rounded-md
+                bg-red-600
+                px-2 py-2
+                text-xs font-medium
+                text-white
+                transition
+                hover:bg-red-700
+                sm:px-3 sm:text-sm
+                md:px-4 md:text-base
+              "
+            >
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
+    </header>
   );
 };
 
