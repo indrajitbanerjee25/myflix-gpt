@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
 import lang from "../utils/languageConstant";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import openai from "../utils/openai";
 import { API_OPTIONS } from "../utils/constant";
+import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
+  const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
 
   const searchMovieTMDB = async (movie) => {
@@ -16,6 +18,13 @@ const GptSearchBar = () => {
       API_OPTIONS,
     );
 
+    /*const searchMovieTMDB = async (movie) => {
+    const data = await fetch(
+      "https://api.themoviedb.org/3/search/movie?query=" +
+        movie +
+        "&include_adult=false&language=en-US&page=1",
+      API_OPTIONS
+    ); */
     const json = await fetchMovies.json();
     return json.results;
   };
@@ -46,6 +55,10 @@ const GptSearchBar = () => {
     const dataArray = gptMovies.map((movies) => searchMovieTMDB(movies));
 
     const tmdbresult = await Promise.all(dataArray);
+    console.log(tmdbresult);
+    dispatch(
+      addGptMovieResult({ movieName: gptMovies, movieResult: tmdbresult }),
+    );
   };
   return (
     <div className="p-[10%] flex justify-center">
