@@ -96,9 +96,9 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute w-full h-screen object-cover">
+      <div className="fixed inset-0 -z-10">
         <img
-          className="w-full h-screen object-cover"
+          className="h-full w-full object-cover"
           src={BG_URL}
           alt="background"
         />
@@ -106,9 +106,9 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white bg-opacity-80 rounded-lg"
+        className="absolute left-1/2 top-1/2 w-[92%] max-w-md -translate-x-1/2 -translate-y-1/2  rounded-lg  bg-black/80 p-6 text-white sm:p-8 md:p-12"
       >
-        <h1 className="font-bold text-3xl py-4">
+        <h1 className="py-3 text-2xl font-bold sm:text-3xl">
           {isSignInForm ? "Sign In" : "Sing Up"}
         </h1>
 
@@ -117,29 +117,34 @@ const Login = () => {
             type="text"
             placeholder="Full Name"
             ref={name}
-            className="p-2 m-2 w-full bg-gray-800 rounded-lg"
+            className="my-2 w-full rounded-lg bg-gray-800 p-3 text-sm outline-none sm:text-base"
           />
         )}
         <input
           ref={email}
           type="text"
           placeholder="Email Address"
-          className="p-2 m-2 w-full bg-gray-800 rounded-lg"
+          className="my-2 w-full rounded-lg bg-gray-800 p-3 text-sm outline-none sm:text-base"
         />
         <input
           ref={password}
           type="password"
           placeholder="Password"
-          className="p-2 m-2 w-full bg-gray-800 rounded-lg"
+          className="my-2 w-full rounded-lg bg-gray-800 p-3 text-sm outline-none sm:text-base"
         />
-        <p className="text-red-500 p-2 m-2 w-full">{errorMessage}</p>
+        <p className="my-2 w-full break-words p-2 text-sm text-red-500">
+          {errorMessage}
+        </p>
         <button
           onClick={handleValidateData}
-          className="p-2 m-2 bg-red-600 w-full rounded-lg"
+          className="my-2 w-full rounded-lg bg-red-600 p-3 text-sm font-medium transition hover:bg-red-700 sm:text-base"
         >
           {isSignInForm ? "Sign In" : "Sing Up"}
         </button>
-        <p className="py-6 cursor-pointer" onClick={toggolSignInFrom}>
+        <p
+          className="cursor-pointer py-5 text-sm text-gray-300 sm:text-base"
+          onClick={toggolSignInFrom}
+        >
           {isSignInForm
             ? "New to Netflix? Sign Up now"
             : "Register User. Please sign in"}
